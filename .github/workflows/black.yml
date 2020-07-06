@@ -1,0 +1,42 @@
+name: black
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+    
+      - name: Install black
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install black
+      
+      - name: blacken
+        run: |
+          python3 -m black .
+      
+      
+      - uses: EndBug/add-and-commit@v4
+        with:
+          message: "automated blackening via actions"
+          add: "*"
+          cwd: .
+          force: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
