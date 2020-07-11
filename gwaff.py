@@ -7,6 +7,7 @@ import argparse
 parser = argparse.ArgumentParser(description="mee6 xp graphing")
 parser.add_argument("-p", help="Use this if you want to plot", action="store_true")
 parser.add_argument("-s", help="Use this if you want to store", action="store_true")
+parser.add_argument("--save", help="Use this if you want to store the generated plots", action="store_true")
 args = parser.parse_args()
 
 
@@ -20,14 +21,18 @@ def save():
         json.dump(gwaff, out, indent=4)
 
 
-def plot_():
+def plot_(save: bool = False):
     print("Plotting...")
 
     with open("gwaff.json", "r") as outfile:
         gwaff = json.load(outfile)
 
-    plot.bar(gwaff)
-    plot.line(gwaff)
+    if parser.parse_args().save:
+        plot.bar(gwaff, save=True)
+        plot.line(gwaff, save=True)
+    else:
+        plot.bar(gwaff)
+        plot.line(gwaff)
 
 
 if parser.parse_args().s:
@@ -37,7 +42,10 @@ elif parser.parse_args().p:
 else:
     i = input("No flag slected, what do you want to do? (p or s?) >")
     if i == "p":
-        plot_()
+        if parser.parse_args().save:
+            plot_(True)
+        else:
+            plot_()
     elif i == "s":
         save()
     else:
