@@ -25,7 +25,7 @@ jobs:
     
     - name: store data
       run:
-        python3 gwaff.py -s -p --save
+        python3 gwaff.py --store --plot --post ${{ secrets.WEBHOOK_URL }}
 
     - uses: EndBug/add-and-commit@v4
       with:
@@ -35,16 +35,3 @@ jobs:
         force: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
-    - name: Preparing to send to discord...
-      run: |
-        curl https://raw.githubusercontent.com/tremby/imgur.sh/main/imgur.sh --output imgur.sh
-        chmod +x ./imgur.sh
-        OUTPUT=$(./imgur.sh images/bar.png)
-    
-    - name: Sending to discord
-      uses: joelwmale/webhook-action@master
-      env:
-        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        data: '{"embeds": [{"title": "title", "thumbnail": {"url": "https://cdn.discordapp.com/embed/avatars/0.png"}, "image": {"url": "https://cdn.discordapp.com/embed/avatars/0.png"}}]}'
-        
