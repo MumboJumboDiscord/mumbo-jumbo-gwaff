@@ -16,6 +16,8 @@ args = parser.parse_args()
 
 def post(url: str):
     print("Posting...")
+    if not os.path.isdir("images/"):
+        os.mkdir("images/")
     for filename in os.listdir("images/"):
         image = open(f"images/{filename}", "rb")
         requests.post(url=url, json={"embeds": [{"title": "title", "thumbnail": {"url": "https://raw.githubusercontent"
