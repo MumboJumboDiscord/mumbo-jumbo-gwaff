@@ -14,18 +14,6 @@ parser.add_argument("--post", help="Use this if you want to post the generated p
 args = parser.parse_args()
 
 
-def post(url: str):
-    print("Posting...")
-    if not os.path.isdir("images/"):
-        os.mkdir("images/")
-    for filename in os.listdir("images/"):
-        image = open(f"images/{filename}", "rb")
-        requests.post(url=url, json={"embeds": [{"title": "title", "thumbnail": {"url": "https://raw.githubusercontent"
-                                                                                        ".com/bwac2517/gwaff/master"
-                                                                                        "/assets/icon.png"},
-                                                 "image": {"url": "attachment://image.png"}}]}, files={"image.png": image})
-
-
 def store():
     print("Storing...")
     new_data = data.get()
@@ -43,8 +31,27 @@ def plot_(save: bool = False):
         gwaff = json.load(outfile)
 
     if args.save:
+        if not os.path.isdir("images"):
+            os.mkdir("images")
         plot.bar(gwaff, save=True)
-        plot.line(gwaff, save=True)
+        if type(args.post) == str:
+            image = open(f"images/bar.png", "rb")
+            requests.post(url=args.post,
+                          json={"embeds": [{"title": "title", "thumbnail": {"url": "https://raw.githubusercontent"
+                                                                                   ".com/bwac2517/gwaff/master"
+                                                                                   "/assets/icon.png"},
+                                            "image": {"url": "attachment://image.png"}}]}, files={"image.png": image})
+        files = plot.line(gwaff, save=True)
+        if type(args.post) == str:
+            for file in files:
+                    image = open(file, "rb")
+                    requests.post(url=args.post,
+                                  json={"embeds": [{"title": "title", "thumbnail": {"url": "https://raw"
+                                                                                           ".githubusercontent "
+                                                                                           ".com/bwac2517/gwaff/master"
+                                                                                           "/assets/icon.png"},
+                                                    "image": {"url": "attachment://image.png"}}]},
+                                  files={"image.png": image})
     else:
         plot.bar(gwaff)
         plot.line(gwaff)
@@ -57,8 +64,6 @@ if args.plot:
         plot_(True)
     else:
         plot_()
-if type(args.post) == str:
-    post(args.post)
 else:
     i = input("No flag slected, what do you want to do? (p or s?) >")
     if i == "p":

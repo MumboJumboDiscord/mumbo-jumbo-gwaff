@@ -138,6 +138,8 @@ def line(gwaff, save: bool = False):
     with open("config.yml", "r") as file:
         config = safe_load(file)
 
+    files = []
+
     mpl.rcParams["axes.prop_cycle"] = mpl.cycler(
         color=[
             "blue",
@@ -205,7 +207,8 @@ def line(gwaff, save: bool = False):
                     title += f"\ngain atleast {config['plot']['minium_xp']} to appear"
                 plt.title(f"{title}\nxp gained overtime")
                 if save:
-                    plt.savefig(f"images/plot_{rankrange[0]}-{rankrange[1]}")
+                    plt.savefig(f"images/plot_{rankrange[0]}-{rankrange[1]}.png")
+                    files.append(f"images/plot_{rankrange[0]}-{rankrange[1]}.png")
                 else:
                     plt.show()
                 plt.close()
@@ -214,3 +217,4 @@ def line(gwaff, save: bool = False):
                 q = 0
         else:
             break
+    return files
