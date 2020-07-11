@@ -25,7 +25,7 @@ jobs:
     
     - name: store data
       run:
-        python3 gwaff.py --store --plot --save --post
+        python3 gwaff.py --store --plot --post ${{ secrets.WEBHOOK_URL }}
 
     - uses: EndBug/add-and-commit@v4
       with:
