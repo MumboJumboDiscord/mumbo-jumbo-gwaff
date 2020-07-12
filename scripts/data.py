@@ -40,7 +40,7 @@ def generate_gwaff(new_users, time):
             gwaff[new_users[user]["id"]] = {
                 "name": f"{new_users[user]['username']}#{new_users[user]['discriminator']}",
                 "message_count": {str(time): new_users[user]["message_count"]},
-                "total_xp": {str(time): new_users[user]["xp"],},
+                "total_xp": {str(time): new_users[user]["xp"]},
                 "detailed_xp": {str(time): new_users[user]["detailed_xp"]},
                 "level": {str(time): new_users[user]["level"]},
             }
