@@ -56,4 +56,13 @@ def generate_gwaff(new_users, time):
             ]
             gwaff[new_users[user]["id"]]["level"][str(time)] = new_users[user]["level"]
 
+    # sort users by their total xp
+    listoftuples = []
+    for user in gwaff:
+        listoftuples.append((gwaff[user]["total_xp"][list(gwaff[user]["total_xp"])[-1]], gwaff[user], user))
+    gwaff = {}
+    listoftuples.sort(key=lambda x: x[0], reverse=True)
+    for user in listoftuples:
+        gwaff[user[2]] = user[1]
+
     return gwaff
