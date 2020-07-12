@@ -9,4 +9,4 @@ plot:
 bar:
   range: 15 # how many users to include in the bar graph
 data:
-  range: -1 # -1 for all users. how many people to include in data collection
+  range: 300
