@@ -34,6 +34,7 @@ def generate_gwaff(new_users, time):
         gwaff = json.load(json_file)
         json_file.close()
 
+    # update all info
     for user in new_users:
         if new_users[user]["id"] not in gwaff:
             gwaff[new_users[user]["id"]] = {
