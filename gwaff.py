@@ -59,7 +59,7 @@ def plot_(save: bool = False):
 
 if args.store:
     store()
-if args.plot:
+elif args.plot:
     if args.save:
         plot_(True)
     else:

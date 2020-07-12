@@ -109,7 +109,7 @@ def line(gwaff, save: bool = False):
                 labelLines(plt.gca().get_lines(), align=True)
                 plt.legend(bbox_to_anchor=(1, 1))
                 plt.xlabel(
-                    f"days since {list(gwaff[next(iter(gwaff))]['total_xp'])[-10:][0].split(' ')[0]}"
+                    f"started at {list(gwaff[next(iter(gwaff))]['total_xp'])[-10:][0].split(' ')[0]}"
                     f"{config['bottom_message']}"
                 )
                 plt.ylabel("gain")
