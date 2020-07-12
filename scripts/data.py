@@ -24,8 +24,8 @@ def get():
                 q += 1
         else:
             break
-        page += 1
         i += 1
+        page += 1
     return users
 
 
@@ -40,7 +40,7 @@ def generate_gwaff(new_users, time):
             gwaff[new_users[user]["id"]] = {
                 "name": f"{new_users[user]['username']}#{new_users[user]['discriminator']}",
                 "message_count": {str(time): new_users[user]["message_count"]},
-                "total_xp": {str(time): new_users[user]["xp"]},
+                "total_xp": {str(time): new_users[user]["xp"], },
                 "detailed_xp": {str(time): new_users[user]["detailed_xp"]},
                 "level": {str(time): new_users[user]["level"]},
             }
@@ -65,5 +65,4 @@ def generate_gwaff(new_users, time):
     listoftuples.sort(key=lambda x: x[0], reverse=True)
     for user in listoftuples:
         gwaff[user[2]] = user[1]
-
     return gwaff
