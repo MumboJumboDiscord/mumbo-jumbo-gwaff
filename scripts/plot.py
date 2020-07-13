@@ -37,6 +37,7 @@ def bar(gwaff, save: bool = False):
     plt.title(f"{config['title']}\ntop xp gains for the day")
     plt.xlabel(f"{config['bottom_message']}")
     plt.ylabel(f"xp gained")
+    plt.tight_layout()
     if save:
         plt.savefig("images/bar.png")
     else:
@@ -122,6 +123,7 @@ def line(gwaff, save: bool = False):
                 if config["plot"]["minium_xp"] > 0:
                     title += f"\ngain atleast {config['plot']['minium_xp']} to appear"
                 plt.title(f"{title}\nxp gained overtime")
+                plt.tight_layout()
                 if save:
                     plt.savefig(f"images/plot_{rankrange[0]}-{rankrange[1]}.png")
                     files.append(f"images/plot_{rankrange[0]}-{rankrange[1]}.png")
