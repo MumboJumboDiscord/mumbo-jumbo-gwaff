@@ -59,12 +59,12 @@ def plot_(save: bool = False):
 
 if args.store:
     store()
-elif args.plot:
+if args.plot:
     if args.save:
         plot_(True)
     else:
         plot_()
-else:
+if not args.store and not args.plot:
     i = input("No flag slected, what do you want to do? (p or s?) >")
     if i == "p":
         plot_()
