@@ -106,7 +106,10 @@ def line(gwaff, save: bool = False):
                 q += 1
                 g += 1
             else:
-                labelLines(plt.gca().get_lines(), align=True)
+                try:
+                    labelLines(plt.gca().get_lines(), align=True)
+                except IndexError:
+                    print("labelLines failed")
                 plt.legend(bbox_to_anchor=(1, 1))
                 plt.xlabel(
                     f"started at {list(gwaff[next(iter(gwaff))]['total_xp'])[-10:][0].split(' ')[0]}"
