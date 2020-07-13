@@ -35,6 +35,7 @@ def plot_(save: bool = False):
             os.mkdir("images")
         plot.bar(gwaff, save=True)
         if type(args.post) == str:
+            print("posting")
             image = open(f"images/bar.png", "rb")
             requests.post(url=args.post,
                           json={"embeds": [{"title": "title", "thumbnail": {"url": "https://raw.githubusercontent"
@@ -43,6 +44,7 @@ def plot_(save: bool = False):
                                             "image": {"url": "attachment://image.png"}}]}, files={"image.png": image})
         files = plot.line(gwaff, save=True)
         if type(args.post) == str:
+            print("posting")
             for file in files:
                     image = open(file, "rb")
                     requests.post(url=args.post,
