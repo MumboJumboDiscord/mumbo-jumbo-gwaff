@@ -123,6 +123,7 @@ def line(gwaff, save: bool = False):
                 if config["plot"]["minium_xp"] > 0:
                     title += f"\ngain atleast {config['plot']['minium_xp']} to appear"
                 plt.title(f"{title}\nxp gained overtime")
+                plt.grid(axis="y")
                 plt.tight_layout()
                 if save:
                     plt.savefig(f"images/plot_{rankrange[0]}-{rankrange[1]}.png")
