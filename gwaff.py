@@ -54,9 +54,22 @@ def plot_(save: bool = False):
                                                                                            "/assets/icon.png"},
                                                     "image": {"url": "attachment://image.png"}}]},
                                   files={"image.png": image})
+        files = plot.versus(gwaff, save=True)
+        if type(args.post) == str:
+            print("posting")
+            for file in files:
+                    image = open(file, "rb")
+                    requests.post(url=args.post,
+                                  json={"embeds": [{"title": "title", "thumbnail": {"url": "https://raw"
+                                                                                           ".githubusercontent "
+                                                                                           ".com/bwac2517/gwaff/master"
+                                                                                           "/assets/icon.png"},
+                                                    "image": {"url": "attachment://image.png"}}]},
+                                  files={"image.png": image})
     else:
         plot.bar(gwaff)
         plot.line(gwaff)
+        plot.versus(gwaff)
 
 
 if args.store:
