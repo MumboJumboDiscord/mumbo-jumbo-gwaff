@@ -137,3 +137,78 @@ def line(gwaff, save: bool = False):
         else:
             break
     return files
+
+
+def versus(gwaff, save: bool = False):
+    with open("config.yml", "r") as file:
+        config = safe_load(file)
+
+    files = []
+
+    mpl.rcParams["axes.prop_cycle"] = mpl.cycler(
+        color=[
+            "blue",
+            "green",
+            "red",
+            "cyan",
+            "magenta",
+            "yellow",
+            "black",
+            "purple",
+            "pink",
+            "brown",
+            "orange",
+            "teal",
+            "coral",
+            "lightblue",
+            "lime",
+            "lavender",
+            "turquoise",
+            "darkgreen",
+            "tan",
+            "salmon",
+            "gold",
+        ]
+    )
+    if config["darkmode"]:
+        plt.style.use("dark_background")
+    plt.figure(figsize=(14, 7))
+    print(config["versus"])
+    for user in gwaff:
+        if int(user) in config["versus"]:
+            y = [0]
+            x = []
+            total_xp_ = list(gwaff[user]["total_xp"])[-10:]
+            total_xp = []
+            for i in total_xp_:
+                total_xp.append(gwaff[user]["total_xp"][i])
+            for i in zip(total_xp, total_xp[1:]):
+                y.append(abs(i[0] - i[1]))
+            f = 0
+            while f < len(list(total_xp)):
+                x.append(f)
+                f += 1
+            plt.plot(x, y, label=gwaff[user]["name"].split("#")[0])
+
+    try:
+        labelLines(plt.gca().get_lines(), align=True)
+    except IndexError:
+        print("labelLines failed")
+    plt.legend(bbox_to_anchor=(1, 1))
+    plt.xlabel(
+        f"started at {list(gwaff[next(iter(gwaff))]['total_xp'])[-10:][0].split(' ')[0]}"
+        f"{config['bottom_message']}"
+    )
+    plt.ylabel("gain")
+    plt.title(f"versus")
+    plt.grid(axis="y")
+    plt.tight_layout()
+    if save:
+        plt.savefig(f"images/plot_versus.png")
+        files.append(f"images/plot_versus.png")
+    else:
+        plt.show()
+    plt.close()
+    plt.figure(figsize=(14, 7))
+    q = 0
+    return files
