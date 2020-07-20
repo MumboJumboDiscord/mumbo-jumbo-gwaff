@@ -8,5 +8,10 @@ plot:
   rank_range: 20 # the interval it starts a new graph
 bar:
   range: 15 # how many users to include in the bar graph
+versus:
+  - 298294667219435521
+  - 387259938977742849
+  - 477148794861912084
+  - 724378805728313395
 data:
   range: 500
