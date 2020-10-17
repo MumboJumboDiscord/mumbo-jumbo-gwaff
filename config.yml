@@ -3,7 +3,7 @@ darkmode: true # dark mode or not
 title: "GWAFF V2"
 bottom_message: "\n\nJoin cremes server for dedicated gwaff channel\nCheck out the github on bwac2517/gwaff"
 plot:
-  range: 70 # how many users to include in the plots
+  range: 80 # how many users to include in the plots
   minium_xp: 300 # anyone with a xp gain below this will not be included in the plots
   rank_range: 20 # the interval it starts a new graph
 bar:
