@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from labellines import labelLines
 from yaml import safe_load
+from datetime import date
+
 
 def bar(gwaff, save: bool = False):
     with open("config.yml", "r") as file:
@@ -46,6 +48,7 @@ def bar(gwaff, save: bool = False):
 
 
 def line(gwaff, save: bool = False):
+    today = date.today()
     with open("config.yml", "r") as file:
         config = safe_load(file)
 
@@ -115,6 +118,7 @@ def line(gwaff, save: bool = False):
                 plt.xlabel(
                     f"started at {list(gwaff[next(iter(gwaff))]['total_xp'])[-10:][0].split(' ')[0]}"
                     f"{config['bottom_message']}"
+                    f"{today.strftime("%B %d, %Y")}"
                 )
                 plt.ylabel("gain")
                 title = f"{config['title']}\nrank: {rankrange[0]}-{rankrange[1]}"
@@ -140,6 +144,7 @@ def line(gwaff, save: bool = False):
 
 
 def versus(gwaff, save: bool = False):
+    today = date.today()
     with open("config.yml", "r") as file:
         config = safe_load(file)
 
@@ -198,6 +203,7 @@ def versus(gwaff, save: bool = False):
     plt.xlabel(
         f"started at {list(gwaff[next(iter(gwaff))]['total_xp'])[-10:][0].split(' ')[0]}"
         f"{config['bottom_message']}"
+        f"{today.strftime("%B %d, %Y")}
     )
     plt.ylabel("gain")
     plt.title(f"versus")
