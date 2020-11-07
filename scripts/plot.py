@@ -118,7 +118,7 @@ def line(gwaff, save: bool = False):
                 plt.xlabel(
                     f"started at {list(gwaff[next(iter(gwaff))]['total_xp'])[-10:][0].split(' ')[0]}"
                     f"{config['bottom_message']}"
-                    f"{today.strftime("%B %d, %Y")}"
+                    f"{today.strftime('%B %d, %Y')}"
                 )
                 plt.ylabel("gain")
                 title = f"{config['title']}\nrank: {rankrange[0]}-{rankrange[1]}"
@@ -203,7 +203,7 @@ def versus(gwaff, save: bool = False):
     plt.xlabel(
         f"started at {list(gwaff[next(iter(gwaff))]['total_xp'])[-10:][0].split(' ')[0]}"
         f"{config['bottom_message']}"
-        f"{today.strftime("%B %d, %Y")}
+        f"{today.strftime('%B %d, %Y')}"
     )
     plt.ylabel("gain")
     plt.title(f"versus")
